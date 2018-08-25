@@ -1,4 +1,12 @@
 {
+  "name": "forms-with-formik",
+  "version": "1.0.0",
+  "description": "A companion repo for a blog post about creating forms with formik",
+  "main": "index.js",
+  "repository": "git@github.com:scottdj92/forms-with-formik.git",
+  "author": "<scottdj92@gmail.com>",
+  "license": "MIT",
+  "private": false,
   "dependencies": {
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.7",
