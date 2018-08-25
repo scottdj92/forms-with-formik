@@ -1,29 +1,29 @@
 import React from "react";
-import { Formik, Field } from "formik";
+import { Formik } from "formik";
 
 const initialValues = {
     firstName: "",
     pet: "",
 };
 
-const App: React.SFC = () => (
+const BasicHTMLForm: React.SFC = () => (
     <>
         <h1>Working with Formik</h1>
         <Formik initialValues={initialValues}
             onSubmit={(values) => console.log(values)}
-            render={({ handleSubmit }) => (
+            render={({ handleSubmit, handleChange }) => (
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="firstName">
                         <div>First Name</div>
-                        <Field type="text" name="firstName"/>
+                        <input type="text" name="firstName"/>
                     </label>
                     <label htmlFor="pet">
                         <div>Pet</div>
-                        <Field name="pet" component="select">
-                            <option value="Dog">Dog</option>
-                            <option value="Cat">Cat</option>
-                            <option value="Other">Other</option>
-                        </Field>
+                        <select name="pet" onChange={handleChange}>
+                            <option>Dog</option>
+                            <option>Cat</option>
+                            <option>Other</option>
+                        </select>
                     </label>
                     <button type="submit">Submit</button>
                 </form>
@@ -32,4 +32,4 @@ const App: React.SFC = () => (
     </>
 );
 
-export default App;
+export default BasicHTMLForm;
