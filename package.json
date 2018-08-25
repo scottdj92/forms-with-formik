@@ -7,6 +7,9 @@
   "author": "<scottdj92@gmail.com>",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "start": "parcel ./server/index.html"
+  },
   "dependencies": {
     "@types/react": "^16.4.11",
     "@types/react-dom": "^16.0.7",
