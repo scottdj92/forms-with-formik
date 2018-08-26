@@ -1,8 +1,9 @@
 import React from "react";
-import { Formik, Field, FormikErrors } from "formik";
+import { Formik, Field } from "formik";
 import { string, object } from "yup";
+import TextField from "./TextField";
 
-interface FormValues {
+export interface FormValues {
     firstName: string;
     pet: string;
 }
@@ -22,15 +23,9 @@ const App: React.SFC = () => (
             })}
             render={({ handleSubmit, errors, touched }) => (
                 <form onSubmit={handleSubmit}>
-                    <label htmlFor="firstName">
-                        <div>First Name</div>
-                        <Field type="text" name="firstName"/>
-                        {
-                            touched.firstName && errors.firstName
-                            ? <div>{errors.firstName}</div>
-                            : null
-                        }
-                    </label>
+                    <Field name="firstName" render={(innerProps) => (
+                        <TextField {...innerProps} title="First Name"/>
+                    )}/>
                     <label htmlFor="pet">
                         <div>Pet</div>
                         <Field name="pet" component="select">
