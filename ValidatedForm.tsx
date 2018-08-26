@@ -1,6 +1,5 @@
 import React from "react";
 import { Formik, Field, FormikErrors } from "formik";
-import { string, object } from "yup";
 
 interface FormValues {
     firstName: string;
@@ -17,19 +16,18 @@ const App: React.SFC = () => (
         <h1>Working with Formik</h1>
         <Formik initialValues={initialValues}
             onSubmit={(values: FormValues) => console.log(values)}
-            validationSchema={object().shape({
-                firstName: string().required("Entering your first name is required."),
-            })}
-            render={({ handleSubmit, errors, touched }) => (
+            validate={(values: FormValues) => {
+                const errors: FormikErrors<FormValues> = {};
+                if (!values.firstName) {
+                    errors.firstName = "Required";
+                }
+                return errors;
+            }}
+            render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="firstName">
                         <div>First Name</div>
                         <Field type="text" name="firstName"/>
-                        {
-                            touched.firstName && errors.firstName
-                            ? <div>{errors.firstName}</div>
-                            : null
-                        }
                     </label>
                     <label htmlFor="pet">
                         <div>Pet</div>
