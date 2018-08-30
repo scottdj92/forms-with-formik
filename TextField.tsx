@@ -24,16 +24,18 @@ const InputError = styled.div`
 
 interface Props {
     title: string;
+    index: number;
 }
 
 type OwnProps = FieldProps<FormValues> & Props;
-const TextField: React.SFC<OwnProps> = ({ title, field, form }) => (
+const TextField: React.SFC<OwnProps> = ({ title, field, form, index }) => (
     <label htmlFor={field.name}>
+    {console.log(field, form)}
         <Title>{title}</Title>
         <FormInput type="text" {...field}/>
         {
-            form.touched[field.name] && form.errors[field.name]
-            ? <InputError>{form.errors[field.name]}</InputError>
+            form.touched.people[index] && form.errors.people[index]
+            ? <InputError>{form.errors.people[index]}</InputError>
             : null
         }
     </label>

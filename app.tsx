@@ -1,16 +1,30 @@
 import React from "react";
-import { Formik, Field } from "formik";
-import { string, object } from "yup";
+import { Formik, Field, FieldArray, Form } from "formik";
+import { string, object, array } from "yup";
 import TextField from "./TextField";
 
 export interface FormValues {
-    firstName: string;
-    pet: string;
+    people: Array<{
+        firstName: string;
+        pet: string;
+    }>;
 }
 
 const initialValues: FormValues = {
-    firstName: "",
-    pet: "",
+    people: [
+        {
+            firstName: "",
+            pet: "",
+        },
+        {
+            firstName: "",
+            pet: "",
+        },
+        {
+            firstName: "",
+            pet: "",
+        },
+    ],
 };
 
 const App: React.SFC = () => (
@@ -19,23 +33,36 @@ const App: React.SFC = () => (
         <Formik initialValues={initialValues}
             onSubmit={(values: FormValues) => console.log(values)}
             validationSchema={object().shape({
-                firstName: string().required("Entering your first name is required."),
+                people: array().of(object().shape({
+                    firstName: string().required("Entering a first name is required"),
+                })),
             })}
-            render={({ handleSubmit, errors, touched }) => (
-                <form onSubmit={handleSubmit}>
-                    <Field name="firstName" render={(innerProps) => (
-                        <TextField {...innerProps} title="First Name"/>
+            render={({ handleSubmit, errors, touched, values }) => (
+                <Form>
+                    <FieldArray name="people"
+                    render={(helpers) => (
+                        <div>
+                            {values.people && values.people.length > 0 ? (
+                                values.people.map( (person, index) => (
+                                    <React.Fragment key={index}>
+                                        <Field name={`people.${index}.firstName`} render={(innerProps) => (
+                                            <TextField {...innerProps} title="First Name" index={index}/>
+                                        )}/>
+                                        <label htmlFor="pet">
+                                            <div>Pet</div>
+                                            <Field name={`people.${index}.pet`} component="select">
+                                                <option value="Dog">Dog</option>
+                                                <option value="Cat">Cat</option>
+                                                <option value="Other">Other</option>
+                                            </Field>
+                                        </label>
+                                    </React.Fragment>
+                                ))
+                            ) : null}
+                        <button type="submit">Submit</button>
+                        </div>
                     )}/>
-                    <label htmlFor="pet">
-                        <div>Pet</div>
-                        <Field name="pet" component="select">
-                            <option value="Dog">Dog</option>
-                            <option value="Cat">Cat</option>
-                            <option value="Other">Other</option>
-                        </Field>
-                    </label>
-                    <button type="submit">Submit</button>
-                </form>
+                </Form>
             )}>
         </Formik>
     </>

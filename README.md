@@ -9,6 +9,7 @@ Each branch of this repo will cover a specific use case to prevent the repo from
 | Initial Form Creation  | [case 1](https://github.com/scottdj92/forms-with-formik/tree/case/initial-form)  |
 | Form Validation  | [case 2](https://github.com/scottdj92/forms-with-formik/tree/case/form-validation)  |
 | Custom styled fields  | [case 3](https://github.com/scottdj92/forms-with-formik/tree/case/custom-fields)  |
+| Array of Fields  | [case 4](https://github.com/scottdj92/forms-with-formik/tree/case/array-of-fields)  |
 
 
 ## Getting started
