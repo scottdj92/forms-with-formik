@@ -30,12 +30,14 @@ interface Props {
 type OwnProps = FieldProps<FormValues> & Props;
 const TextField: React.SFC<OwnProps> = ({ title, field, form, index }) => (
     <label htmlFor={field.name}>
-    {console.log(field, form)}
         <Title>{title}</Title>
         <FormInput type="text" {...field}/>
         {
-            form.touched.people[index] && form.errors.people[index]
-            ? <InputError>{form.errors.people[index]}</InputError>
+            form.errors.people !== undefined
+            && form.errors.people[index] !== undefined
+            && form.touched.people !== undefined
+            && form.touched.people[index] !== undefined
+            ? <InputError>{form.errors.people[index].firstName}</InputError>
             : null
         }
     </label>
